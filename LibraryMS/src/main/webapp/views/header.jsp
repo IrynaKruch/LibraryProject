@@ -26,7 +26,7 @@
 					</a></li>
 				</c:if>
                 <c:if
-					test="${pageContext.request.requestURL!='http://localhost:8080/LibraryMS/views/personInfo.jsp'}">
+					test="${pageContext.request.requestURL!='http://localhost:8080/LibraryMS/views/personInfo.jsp' && sessionUser!=null}">
 					<li><a href="<c:url value="/views/personInfo.jsp"/>"> 
 					<fmt:message key="header.personInfo" />
 					</a></li>
@@ -41,9 +41,6 @@
 					<li><a href="<c:url value="/showOrders"/>"> 
 					<fmt:message key="header.showorders" />
 					</a></li>
-					<%-- <li><a href="/Controller?command=readingRoom"> 
-					<fmt:message key="header.readingRoom" />
-					</a></li> --%>
 				</c:if>
 				<c:if test="${sessionUser.role=='ADMIN'}">
 					<li><a href="<c:url value="/readers"/>"> 
@@ -52,9 +49,6 @@
 					<li><a href="<c:url value="/showOrders"/>"> 
 					<fmt:message key="header.showorders" />
 					</a></li>
-					<%-- <li><a href="/Controller?command=readingRoom"> 
-					<fmt:message key="header.readingRoom" />
-					</a></li> --%>
 					<li><a href="<c:url value="/views/addBook.jsp"/>"> 
 					<fmt:message key="header.addBook" />
 					</a></li>
@@ -80,8 +74,6 @@
 		</div>
 	</div>
 </nav>
-
-<h3>
-	<fmt:message key="header.hello" />, <c:out value="${sessionUser.fullname}" />!
-</h3>
-<hr />
+<div class="container p-1">
+<h3><fmt:message key="header.hello" />, <c:out value="${sessionUser.fullname}" />!</h3>
+</div>

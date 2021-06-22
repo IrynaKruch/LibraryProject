@@ -9,6 +9,18 @@ private String edition;
 private int yearOfEd;
 private int quantity;
 
+
+
+public Book() {
+	
+}
+public Book(String name, String author, String edition, int yearOfEd, int quantity) {
+	this.name = name;
+	this.author = author;
+	this.edition = edition;
+	this.yearOfEd = yearOfEd;
+	this.quantity = quantity;
+}
 public int getId() {
 	return id;
 }

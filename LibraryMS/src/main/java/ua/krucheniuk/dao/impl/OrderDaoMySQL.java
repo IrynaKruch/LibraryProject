@@ -1,6 +1,7 @@
 package ua.krucheniuk.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -135,8 +136,8 @@ public class OrderDaoMySQL implements OrderDao {
 				PreparedStatement preparedStatement = con.prepareStatement(UPDATE_ORDER);) {
 			preparedStatement.setInt(1, order.getUser().getId());
 			preparedStatement.setInt(2, order.getBook().getId());
-			preparedStatement.setDate(3, order.getLendDate());
-			preparedStatement.setDate(4, order.getReturnDate());
+			preparedStatement.setDate(3, (Date) order.getLendDate());
+			preparedStatement.setDate(4, (Date) order.getReturnDate());
 			preparedStatement.setBoolean(5, order.isSubscribe());
 			preparedStatement.setBoolean(6, order.isProcessed());
 			int i = preparedStatement.executeUpdate();

@@ -66,6 +66,7 @@
 						</c:choose>
                 </td>
                 <td>${r.role}
+                <c:if test="${sessionUser.role == 'ADMIN'}">
                 <form class="form-inline" name="form"  method="POST" action="setRole">
 					<input type="hidden" name="userId" value="${r.id}" />
 						<p>
@@ -79,6 +80,7 @@
 					<input  role="button" type="submit"
 						value="<fmt:message key="readers.changeRole" />"></input>
 				</form>
+				</c:if>
 				</td>
             </tr>
             </c:forEach>

@@ -9,7 +9,7 @@ public class Path {
 	public static final String ERROR_PAGE = "/views/error.jsp";
 	public static final String ADMIN_PAGE = "/views/admin.jsp";
 	public static final String READER_PAGE = "/views/readersBooks.jsp";
-	public static final String LIBRARIAN_PAGE = "/views/librarian.jsp";
+	public static final String LIBRARIAN_PAGE = "/views/orders.jsp";
 	public static final String CATALOGUE_PAGE = "/views/bookcatalogue.jsp";
 	public static final String PERSONAL_PAGE = "/views/personInfo.jsp";
 	public static final String READERS_PAGE = "/views/readers.jsp";

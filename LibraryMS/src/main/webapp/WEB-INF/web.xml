@@ -41,5 +41,14 @@
     <filter-name>AccessFilter</filter-name>
     <servlet-name>Servlet</servlet-name>
   </filter-mapping>
+
+  <filter>
+    <filter-name>ExceptionFilter</filter-name>
+    <filter-class>ua.krucheniuk.filters.ExceptionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ExceptionFilter</filter-name>
+    <servlet-name>Servlet</servlet-name>
+  </filter-mapping>
   
 </web-app>

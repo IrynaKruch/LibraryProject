@@ -24,10 +24,10 @@
             <th><fmt:message key="homepage.author"/></th>
             <th><fmt:message key="reader.lendDate"/></th>
             <th><fmt:message key="reader.returnDate"/></th>
-            <c:if test="${user.admin}">
-                <th><fmt:message key="return" /></th>
-            </c:if>
             <th><fmt:message key="reader.daysLeft" /></th>
+            <c:if test="${sessionUser.role=='ADMIN' || sessionUser.role=='LIBRARIAN'}">
+                <th><fmt:message key="librarian.return" /></th>
+            </c:if>
         </tr>
         </thead>
         <tbody>
@@ -43,20 +43,17 @@
                 <td>
                     <fmt:formatDate pattern="yyyy-MM-dd" value="${order.returnDate}"/>
                 </td>
-                <c:if test="${user.admin}">
-                    <td>
-                        <form action="/Controller" method="POST">
-                            <input type="hidden" name="command" value="returnBook"/>
-                            <input type="hidden" name="id" value="${rb.id}"/>
-                            <input type="hidden" name="page" value="readerInfo">
-
-                            <button type="submit" class="btn btn-success"><fmt:message key="return"/></button>
-                        </form>
-                    </td>
-                </c:if>
                 <td>
 				${daysLeft[key=order.id]}
-                </td> 
+                </td>
+                <c:if test="${sessionUser.role=='ADMIN' || sessionUser.role=='LIBRARIAN'}">
+                    <td>
+                      <form action="returnBook" method="POST">
+                        <input type="hidden" name="orderId" value="${order.id}"/>
+                        <button type="submit" class="btn btn-danger"><fmt:message key="librarian.return"/></button>
+                      </form>
+                    </td>
+                </c:if>                 
             </tr>
         </c:forEach>
         </tbody>

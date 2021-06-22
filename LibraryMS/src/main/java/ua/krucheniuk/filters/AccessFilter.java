@@ -14,6 +14,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import ua.krucheniuk.constants.Messages;
+import ua.krucheniuk.constants.Path;
 import ua.krucheniuk.entity.User;
 
 public class AccessFilter implements Filter {
@@ -29,13 +31,14 @@ public class AccessFilter implements Filter {
 		commonCommands.add("catalogue");
 		commonCommands.add("register");
 		commonCommands.add("login");
-		commonCommands.add("logout");
 		commonCommands.add("searchBook");
 		commonCommands.add("sortBooks");
         
 		readerCommands.add("order");
 		readerCommands.add("readerInfo");
 		readerCommands.add("updateUser");
+		readerCommands.add("logout");
+
 		
 		librarianCommands.add("showOrders");
 		librarianCommands.add("processOrder");
@@ -49,15 +52,18 @@ public class AccessFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		
+		HttpServletRequest req = (HttpServletRequest) request;
+		String locale = (String) req.getSession().getAttribute("locale");
 		if (accessAllowed(request)) {
 			chain.doFilter(request, response);
 		} else {
-			String errorMessasge = "You do not have permission to access the requested resource, please contact administrator";
+			String errorMessage = Messages.getInstance(locale).getString(Messages.ACCESS_DENIED);
+
+//					 "You do not have permission to access the requested resource, please contact administrator";
 			
-			request.setAttribute("errMessage", errorMessasge);
+			request.setAttribute("errMessage", errorMessage);
 			
-			request.getRequestDispatcher(ua.krucheniuk.constants.Path.ERROR_PAGE)
+			request.getRequestDispatcher(Path.ERROR_PAGE)
 					.forward(request, response);
 		}
         

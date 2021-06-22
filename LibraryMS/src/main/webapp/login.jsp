@@ -15,25 +15,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login ${locale}</title>
-<!-- <script>
-function validate()
-{ 
-     var login = document.form.login.value; 
-     var password = document.form.password.value;
- 
-     if (login==null || login=="")
-     { 
-     alert("Login cannot be blank"); 
-     return false; 
-     }
-     else if(password==null || password=="")
-     { 
-     alert("Password cannot be blank"); 
-     return false; 
-     } 
-}
-}
-</script> -->
 </head>
 
 <body>
@@ -73,35 +54,5 @@ function validate()
 			<c:remove var="errMessage" scope="session" />
 		
 	</div>
-
-
-
-	<%-- <form name="form" action="Servlet" method="post"
-		onsubmit="return validate()">
-		<input type="hidden" name="command" value="login" />
-		<table align="center">
-			<tr>
-				<td><fmt:message key="login.login" /></td>
-				<td><input type="text" name="login" /></td>
-			</tr>
-			<tr>
-				<td><fmt:message key="login.password" /></td>
-				<td><input type="text" name="password" /></td>
-			</tr>
-			<tr>
-				<td><span style="color: red"><%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%></span></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" value="Login"></input><input
-					type="reset" value="Reset"></input></td>
-			</tr>
-		</table>
-	</form>
- --%>
-
-
-
-
 </body>
 </html>

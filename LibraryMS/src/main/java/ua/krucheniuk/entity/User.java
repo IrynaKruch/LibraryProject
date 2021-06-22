@@ -1,7 +1,5 @@
 package ua.krucheniuk.entity;
 
-import ua.krucheniuk.entity.User.ROLE;
-
 public class User {
     private int id;
     private String fullname;
@@ -14,6 +12,18 @@ public class User {
     }
 
     private ROLE role;
+    
+    
+	public User() {
+		
+	}
+
+	public User(String fullname, String email, String login, String password) {
+		this.fullname = fullname;
+		this.email = email;
+		this.login = login;
+		this.password = password;
+	}
 
 	public int getId() {
 		return id;

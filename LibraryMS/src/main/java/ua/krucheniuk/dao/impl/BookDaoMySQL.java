@@ -16,7 +16,7 @@ import ua.krucheniuk.entity.Book;
 
 public class BookDaoMySQL implements BookDao {
 
-	private final static Logger LOGGER = Logger.getLogger(BookDaoMySQL.class);
+	private final static Logger log = Logger.getLogger(BookDaoMySQL.class);
 
 	private static volatile BookDaoMySQL bookDaoMySQL;
 
@@ -30,7 +30,6 @@ public class BookDaoMySQL implements BookDao {
 	private final String UPDATE_BOOK = "UPDATE books SET name=?,author=?,edition=?,yearOfED=?,quantity=? WHERE id=?";
 	private final String UPDATE_BOOK_AMOUNT_BY_ID = "UPDATE books SET quantity=? WHERE id=?";
 	private final String DELETE_BOOK = "DELETE FROM books WHERE id=?";
-	private final String SORT_BOOKS = "SELECT SQL_CALC_FOUND_ROWS * FROM books ORDER BY ? ? limit ?, ?";
 	
 	private int bookCount;
 
@@ -64,7 +63,7 @@ public class BookDaoMySQL implements BookDao {
 			if (i != 0)
 				return "SUCCESS";
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return "Oops.. Something went wrong there..!";
 
@@ -84,7 +83,7 @@ public class BookDaoMySQL implements BookDao {
 					book = mapper.getBookFromResultSet(resultSet);
 			}
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return book;
 	}
@@ -102,7 +101,7 @@ public class BookDaoMySQL implements BookDao {
 				bookList.add(book);
 			}
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return bookList;
 	}
@@ -121,7 +120,7 @@ public class BookDaoMySQL implements BookDao {
 			if (i!=0) 
 	             return "SUCCESS";
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
         return "Oops.. Something went wrong there..!";
 	}
@@ -133,7 +132,7 @@ public class BookDaoMySQL implements BookDao {
 			preparedStatement.setInt(1, book.getId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 	}
 
@@ -151,7 +150,7 @@ public class BookDaoMySQL implements BookDao {
 				}
 			}
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return books;
 	}
@@ -170,7 +169,7 @@ public class BookDaoMySQL implements BookDao {
 				}
 			}
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return books;
 	}
@@ -189,7 +188,7 @@ public class BookDaoMySQL implements BookDao {
 				}
 			}
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return books;
 	}
@@ -202,7 +201,7 @@ public class BookDaoMySQL implements BookDao {
 			preparedStatement.setInt(2, bookId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 	}
 
@@ -231,7 +230,7 @@ public class BookDaoMySQL implements BookDao {
 			connection.commit();
 			resultSet.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return books;
 	}
@@ -246,7 +245,7 @@ public class BookDaoMySQL implements BookDao {
 			preparedStatement.setInt(1, bookId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
     }
 }

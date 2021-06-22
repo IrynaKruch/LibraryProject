@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <%@ taglib prefix="ct" uri="/WEB-INF/tld/customtags.tld" %> --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <!DOCTYPE html>
@@ -53,16 +52,18 @@
 				</div>
 			</div>
 		</div>
+		<br/>
 	</form>
 
-	
+<div class="container-lg">
+<br/>
 	<p style="color: blue">${message}</p>
 	<c:remove var="message" scope="session" />
-	<br /> 
-	<div class="row">
-	<table>
+</div>
+	
+	<div class="row">	
 		<c:forEach var="b" items="${catalogue}">
-			<div class="product col-md-12 col-sm-4 col-xs-12">
+			<div class="col-sm-4 col-md-4 col-lg-4">
 				<div class="thumbnail">
 					<h4>
 						<c:choose>
@@ -89,23 +90,6 @@
 						<fmt:message key="homepage.yearOfEd" />
 						:${b.yearOfEd}
 					</p>
-					<c:choose>
-						<c:when test="${sessionUser.role=='ADMIN'}">
-							<p>
-								<fmt:message key="homepage.quantity" />
-								:
-							<form name="setAmount" method="POST" action="setBookAmount">
-<!-- 								<input type="hidden" name="command" value="setBookAmount" /> --> 
-								<input type="hidden" name="bookId" value="${b.id}" /> 
-								<input class="form-control" type="number" name="amount"
-									required="required" value="${b.quantity}" placeholder="<fmt:message key="homepage.bookAmount" />">
-								<button type="submit" class="btn btn-default">
-									<fmt:message key="homepage.setAmount" />
-								</button>
-							</form>
-						</c:when>
-					</c:choose>
-
 
 					<c:choose>
 						<c:when test="${b.quantity>0}">
@@ -127,6 +111,23 @@
 							</p>
 						</c:otherwise>
 					</c:choose>
+					
+					<c:choose>
+						<c:when test="${sessionUser.role=='ADMIN'}">
+							<p>
+								<fmt:message key="homepage.quantity" />:
+							<form name="setAmount" method="POST" action="setBookAmount">
+								<input type="hidden" name="bookId" value="${b.id}" /> 
+								<input class="form-control" type="number" name="amount"
+									required="required" value="${b.quantity}" placeholder="<fmt:message key="homepage.bookAmount" />">
+								<button type="submit" class="btn btn-default" 							
+								onclick="return confirm('Check all the documents are in order.')">
+									<fmt:message key="homepage.setAmount" />
+								</button>
+							</form>
+						</c:when>
+					</c:choose>
+					
 					<br>
 					<c:if test="${sessionUser.role=='ADMIN'}">
 					        <c:url var="deleteBook" value="deleteBook">
@@ -142,7 +143,6 @@
 				</div>
 			</div>
 		</c:forEach>
-		</table>
 	</div>
 <div> 
 <ul class="pagination">

@@ -15,7 +15,7 @@ import ua.krucheniuk.entity.User;
 
 public class UserDaoMySQL implements UserDao {
 
-	private final static Logger LOGGER = Logger.getLogger(UserDaoMySQL.class);
+	private final static Logger log = Logger.getLogger(UserDaoMySQL.class);
 
 	private static volatile UserDaoMySQL userDaoMySQL;
 	
@@ -56,7 +56,8 @@ public class UserDaoMySQL implements UserDao {
 			if (i!=0) 
 	             return "SUCCESS";
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
+			throw new RuntimeException(e.getMessage());
 		}
         return "Oops.. Something went wrong there..!";  
 
@@ -76,7 +77,7 @@ public class UserDaoMySQL implements UserDao {
 					user = mapper.getUserFromResultSet(resultSet);
 			}
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return user;
 	}
@@ -94,7 +95,7 @@ public class UserDaoMySQL implements UserDao {
 				userList.add(user);
 			}
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		return userList;
 	}
@@ -113,7 +114,7 @@ public class UserDaoMySQL implements UserDao {
 			if (i!=0) 
 	             return "SUCCESS";
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
         return "Oops.. Something went wrong there..!";
 	}
@@ -125,7 +126,7 @@ public class UserDaoMySQL implements UserDao {
 			preparedStatement.setInt(1, user.getId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 	}
 	

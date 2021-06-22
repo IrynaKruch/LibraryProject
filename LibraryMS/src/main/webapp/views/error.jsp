@@ -1,23 +1,36 @@
-<%@ page language="java" isErrorPage="true"  contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, java.text.*" %>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+	pageEncoding="UTF-8"%>
+<fmt:setLocale value="${locale}" />
+<fmt:setBundle basename="locale" />
 
-<html>
+<html lang="${locale}">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Error Page</title>
 </head>
     <body>
-        <h2>
-           Error Page<br/>
-            <i>${errMessage}</i>
-        </h2>
-
-
-       <br>
-Return to <a href="${pageContext.request.contextPath}/homepage.jsp">homepage</a>
-<div style="text-align: right"><a href="${pageContext.request.contextPath}/logout">Logout</a></div>
-<a href="${pageContext.request.contextPath}/">login</a>
-    </body>
-</html>
+    <div class="container">
+    <div class="row">
+        <div class="error-template">
+            <h1><fmt:message key="header.error"/></h1>
+            <div class="error-details">
+                ${errMessage}
+                <br>
+            </div>
+            <div class="error-actions">
+                  <c:choose>
+					<c:when test="${sessionUser==null}">
+						<a href="<c:url value="/login.jsp"/>"> <fmt:message key="login.login"/></a>
+					</c:when>
+					<c:otherwise>
+					    <a href="<c:url value="/catalogue"/>"><fmt:message key="header.mainPage"/></a>
+					</c:otherwise>
+				  </c:choose>
+            </div>
+        </div>
+    </div>
+</div>
+    
+       

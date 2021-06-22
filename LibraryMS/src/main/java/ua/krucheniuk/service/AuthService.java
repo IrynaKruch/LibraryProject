@@ -11,10 +11,14 @@ import ua.krucheniuk.entity.User;
 public class AuthService {
 	
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-    private static final String  VALID_NAME_REGEX="[A-Za-zА-Яа-яІіЄєЇї']{3,30}";
+    private static final String  VALID_NAME_REGEX="[A-Za-zА-Яа-яІіЄєЇї']{3,30}( [A-Za-zА-Яа-яІіЄєЇї']{3,30})?";
     private static final String  VALID_LOGIN_REGEX="[A-Za-zА-Яа-яІіЄєЇї']{3,30}";
     private static final String VALID_PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{5,}$";
-    private static final Logger LOGGER=Logger.getLogger(AuthService.class);
+    private static final String  VALID_YEAR = "[0-9]{4}";
+    private static final String VALID_NUMBER = "[0-9]{1,3}";
+
+    
+    private static final Logger log=Logger.getLogger(AuthService.class);
 
 	
 	
@@ -67,6 +71,14 @@ public class AuthService {
     public boolean checkEmail(String email){
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(email);
         return matcher.find();
+    }
+    public boolean checkYear(String year){
+        return year.matches(VALID_YEAR);
+
+    }
+    public boolean checkQuantity(String quantity){
+        return quantity.matches(VALID_NUMBER);
+
     }
 
 	

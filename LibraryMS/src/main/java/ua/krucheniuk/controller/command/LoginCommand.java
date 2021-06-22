@@ -3,12 +3,19 @@ package ua.krucheniuk.controller.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import ua.krucheniuk.entity.User;
 import ua.krucheniuk.service.AuthService;
 import ua.krucheniuk.constants.Messages;
 import ua.krucheniuk.constants.Path;
 
 public class LoginCommand implements Command {
+	
+    private final static Logger log = Logger.getLogger(LoginCommand.class);
+
+	AuthService authService = AuthService.getInstance();
+
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -16,7 +23,8 @@ public class LoginCommand implements Command {
 		String password = request.getParameter("password");
 		String locale = request.getParameter("locale");
 
-		if (login == null || login.equals("") || password == null || password.equals("")) {
+		if (!authService.checkLogin(login) || !authService.checkPassword(password)) {
+            request.setAttribute("errMessage", Messages.getInstance(locale).getString(Messages.LOG_ERROR));
 			return Path.LOGIN_PAGE;
 		}
 
@@ -31,6 +39,8 @@ public class LoginCommand implements Command {
 			return "redirect:" + Path.HOME_PAGE;
 			
 		} else {
+			log.error(user);
+			CommandUtility.logout(request, login);
 			request.setAttribute("errMessage", Messages.getInstance(locale).getString(Messages.LOG_ERROR));
 			return Path.ERROR_PAGE;	
 		}
