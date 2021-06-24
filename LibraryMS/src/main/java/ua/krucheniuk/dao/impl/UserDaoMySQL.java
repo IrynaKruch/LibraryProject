@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import ua.krucheniuk.dao.mapper.UserMapper;
 import ua.krucheniuk.dao.model.UserDao;
 import ua.krucheniuk.entity.User;
+import ua.krucheniuk.exception.NotUniqueUserException;
 
 public class UserDaoMySQL implements UserDao {
 
@@ -41,7 +42,6 @@ public class UserDaoMySQL implements UserDao {
 	}
 
 	private UserDaoMySQL() {
-
 	}
 
 	@Override
@@ -62,6 +62,26 @@ public class UserDaoMySQL implements UserDao {
         return "Oops.. Something went wrong there..!";  
 
 	}
+	
+	@Override
+	public String createUser(User user) throws NotUniqueUserException {
+		try (Connection connection = DBConnection.createConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER)) {
+			preparedStatement.setString(1, user.getFullname());
+			preparedStatement.setString(2, user.getEmail());
+			preparedStatement.setString(3, user.getLogin());
+			preparedStatement.setString(4, user.getPassword());
+			int i = preparedStatement.executeUpdate();
+			if (i!=0) 
+	             return "SUCCESS";
+		} catch (SQLException e) {
+			log.error(e.getMessage());
+			throw new NotUniqueUserException(e.getMessage(), (user.getLogin()+" & "+user.getEmail()));
+		}
+        return "Oops.. Something went wrong there..!";  
+
+	}
+
 
 	@Override
 	public User findById(int id) {
@@ -115,6 +135,27 @@ public class UserDaoMySQL implements UserDao {
 	             return "SUCCESS";
 		} catch (SQLException e) {
 			log.error(e.getMessage());
+		}
+        return "Oops.. Something went wrong there..!";
+	}
+	
+	
+	@Override
+	public String updateUser(User user) throws NotUniqueUserException {
+		try (Connection con = DBConnection.createConnection();
+				PreparedStatement preparedStatement = con.prepareStatement(UPDATE_USER);) {
+			preparedStatement.setString(1, user.getFullname());
+			preparedStatement.setString(2, user.getEmail());
+			preparedStatement.setString(3, user.getLogin());
+			preparedStatement.setString(4, user.getPassword());
+			preparedStatement.setString(5, user.getRole());
+			preparedStatement.setInt(6, user.getId());
+			int i = preparedStatement.executeUpdate();
+			if (i!=0) 
+	             return "SUCCESS";
+		} catch (SQLException e) {
+			log.error(e.getMessage());
+			throw new NotUniqueUserException(e.getMessage(), (user.getLogin()+" & "+user.getEmail()));
 		}
         return "Oops.. Something went wrong there..!";
 	}

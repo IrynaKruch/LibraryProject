@@ -39,7 +39,8 @@ public class Servlet extends HttpServlet {
 			request.getRequestDispatcher(page).forward(request, response);     
 		}
 		} catch (ServletException | IOException ex) {
-			log.error(ex.getMessage());
+			log.error(ex.getStackTrace());
+			throw ex;
 		}
 	}
 }

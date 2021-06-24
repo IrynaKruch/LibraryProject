@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 
 import ua.krucheniuk.dao.impl.BookDaoMySQL;
 import ua.krucheniuk.entity.Book;
+import ua.krucheniuk.service.LibrarianService;
 
 
 public class HomePageCommandTest {
@@ -30,7 +31,7 @@ public class HomePageCommandTest {
 	
 	@Test
 	public final void testExecute() {
-		HomePageCommand homePageCommand = new HomePageCommand();
+		HomePageCommand homePageCommand = new HomePageCommand(new LibrarianService());
 		List <Book> books = new ArrayList<>();
 		books.add(new Book("Name","Author","Edit",2001,3));
 		when(mockBookDao.findAll()).thenReturn(books);

@@ -21,7 +21,6 @@ public class BookDaoMySQL implements BookDao {
 	private static volatile BookDaoMySQL bookDaoMySQL;
 
 	private final String INSERT_BOOK = "INSERT INTO books (name,author,edition,yearOfEd,quantity) VALUES(?,?,?,?,?)";
-
 	private final String SELECT_All_BOOKS = "SELECT * FROM books";
 	private final String SELECT_BOOK_byId = SELECT_All_BOOKS + " WHERE id=?";
 	private final String SELECT_BOOKS_BY_NAME = SELECT_All_BOOKS + " WHERE name like ?";
@@ -30,7 +29,7 @@ public class BookDaoMySQL implements BookDao {
 	private final String UPDATE_BOOK = "UPDATE books SET name=?,author=?,edition=?,yearOfED=?,quantity=? WHERE id=?";
 	private final String UPDATE_BOOK_AMOUNT_BY_ID = "UPDATE books SET quantity=? WHERE id=?";
 	private final String DELETE_BOOK = "DELETE FROM books WHERE id=?";
-	
+
 	private int bookCount;
 
 	public static BookDaoMySQL getInstance() {
@@ -117,12 +116,12 @@ public class BookDaoMySQL implements BookDao {
 			preparedStatement.setInt(5, book.getQuantity());
 			preparedStatement.setInt(6, book.getId());
 			int i = preparedStatement.executeUpdate();
-			if (i!=0) 
-	             return "SUCCESS";
+			if (i != 0)
+				return "SUCCESS";
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 		}
-        return "Oops.. Something went wrong there..!";
+		return "Oops.. Something went wrong there..!";
 	}
 
 	@Override
@@ -206,27 +205,27 @@ public class BookDaoMySQL implements BookDao {
 	}
 
 	public List<Book> sortBooks(int offset, int recordsOnPage, String sortingType, String sortingColumn) {
-    	     StringBuilder queryBuilder = new StringBuilder();
-    	     queryBuilder.append("SELECT SQL_CALC_FOUND_ROWS * FROM books ");
-    	         queryBuilder.append(" ORDER BY ")
-    	          .append(sortingColumn).append(" ").append(sortingType)
-    	            .append(" limit ").append(offset).append(", ").append(recordsOnPage);
+		StringBuilder queryBuilder = new StringBuilder();
+		queryBuilder.append("SELECT SQL_CALC_FOUND_ROWS * FROM books ");
+		queryBuilder.append(" ORDER BY ").append(sortingColumn).append(" ").append(sortingType).append(" limit ")
+				.append(offset).append(", ").append(recordsOnPage);
+
 		List<Book> books = new ArrayList<>();
 		try (Connection connection = DBConnection.createConnection();
 				Statement statement = connection.createStatement();) {
 			connection.setAutoCommit(false);
-			
+
 			BookMapper mapper = new BookMapper();
 			ResultSet resultSet = statement.executeQuery(queryBuilder.toString());
-				while (resultSet.next()) {
-					Book book = new Book();
-					book = mapper.getBookFromResultSet(resultSet);
-					books.add(book);
-				}
+			while (resultSet.next()) {
+				Book book = new Book();
+				book = mapper.getBookFromResultSet(resultSet);
+				books.add(book);
+			}
 			resultSet = statement.executeQuery("SELECT FOUND_ROWS()");
-			if(resultSet.next())
+			if (resultSet.next())
 				this.bookCount = resultSet.getInt(1);
-			
+
 			connection.commit();
 			resultSet.close();
 		} catch (SQLException e) {
@@ -234,18 +233,18 @@ public class BookDaoMySQL implements BookDao {
 		}
 		return books;
 	}
-	
-    public int getBookCount() {
-        return this.bookCount;
-    }
 
-    public void deleteBook(Integer bookId) {
-    	try (Connection con = DBConnection.createConnection();
+	public int getBookCount() {
+		return this.bookCount;
+	}
+
+	public void deleteBook(Integer bookId) {
+		try (Connection con = DBConnection.createConnection();
 				PreparedStatement preparedStatement = con.prepareStatement(DELETE_BOOK);) {
 			preparedStatement.setInt(1, bookId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 		}
-    }
+	}
 }

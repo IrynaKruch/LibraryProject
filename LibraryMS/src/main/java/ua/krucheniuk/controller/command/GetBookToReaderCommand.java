@@ -6,19 +6,21 @@ import javax.servlet.http.HttpServletResponse;
 import ua.krucheniuk.constants.Path;
 import ua.krucheniuk.service.LibrarianService;
 
-
 public class GetBookToReaderCommand implements Command {
 
-    private LibrarianService librarianService = LibrarianService.getInstance();
+	LibrarianService librarianService;
+
+	public GetBookToReaderCommand(LibrarianService librarianService) {
+		this.librarianService = librarianService;
+	}
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-        Integer id= Integer.valueOf(request.getParameter("id"));
-        Integer days=Integer.valueOf(request.getParameter("days"));
-        librarianService.getBookToReader(id,days);
-        request.setAttribute("orders", librarianService.getBookOrders());
-        return Path.SHOWORDERS_COMMAND;
-    }
-
+		Integer id = Integer.valueOf(request.getParameter("id"));
+		Integer days = Integer.valueOf(request.getParameter("days"));
+		librarianService.getBookToReader(id, days);
+		request.setAttribute("orders", librarianService.getBookOrders());
+		return Path.SHOWORDERS_COMMAND;
+	}
 
 }

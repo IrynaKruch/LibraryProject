@@ -14,27 +14,27 @@ import ua.krucheniuk.service.OrderService;
 
 public class ReadersBooksCommand implements Command {
 
-	private OrderService orderService = OrderService.getInstance();
-	private LibrarianService librarianService = LibrarianService.getInstance();
+	OrderService orderService;
+	LibrarianService librarianService;
 
+	public ReadersBooksCommand(OrderService orderService, LibrarianService librarianService) {
+		this.orderService = orderService;
+		this.librarianService = librarianService;
+	}
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		User currentUser = (User) request.getSession().getAttribute(USER);
+		User currentUser = (User) request.getSession().getAttribute("sessionUser");
 		List<Order> userOrders;
-        if (currentUser.getRole()=="ADMIN" || currentUser.getRole()=="LIBRARIAN") {
-            request.getSession().setAttribute("reader", currentUser);
-        }
+		if (currentUser.getRole() == "ADMIN" || currentUser.getRole() == "LIBRARIAN") {
+			request.getSession().setAttribute("reader", currentUser);
+		}
 		userOrders = orderService.getReaderOrders(currentUser.getId());
 		request.setAttribute("userOrders", userOrders);
-		Map<Integer, String> daysleft = librarianService.countDaysLeft(userOrders);
-		
-			request.setAttribute("daysLeft", daysleft);
+		Map<Integer, String> daysleft = librarianService.setDaysLeftColumn(userOrders);
+		request.setAttribute("daysLeft", daysleft);
 
 		return Path.READER_PAGE;
 	}
 
-	
-	
-	
 }

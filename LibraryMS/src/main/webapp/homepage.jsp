@@ -145,6 +145,7 @@
 		</c:forEach>
 	</div>
 <div> 
+
 <ul class="pagination">
    <c:if test="${numberOfPages > 1}">
       <c:if test="${currentPage != 1}">

@@ -4,11 +4,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.krucheniuk.constants.Path;
+import ua.krucheniuk.service.AuthService;
 import ua.krucheniuk.service.SearchService;
 
 public class SearchBookCommand implements Command {
 
-	private SearchService searchService = SearchService.getInstance();
+	SearchService searchService;
+	AuthService authService;
+
+	public SearchBookCommand(SearchService searchService, AuthService authService) {
+		this.searchService = searchService;
+		this.authService = authService;
+	}
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -19,10 +26,11 @@ public class SearchBookCommand implements Command {
 
 			if (criteria.equals("author"))
 				request.getSession().setAttribute("catalogue", searchService.getBooksByAuthor(text));
-			else if (criteria.equals("bookname"))
-				request.getSession().setAttribute("catalogue", searchService.getBooksByName(text));
-			else
+			else if (criteria.equals("yearOfEd") & authService.checkYear(text))
 				request.getSession().setAttribute("catalogue", searchService.getBooksByYear(Integer.parseInt(text)));
+			else
+				request.getSession().setAttribute("catalogue", searchService.getBooksByName(text));
+
 		}
 
 		return Path.HOME_PAGE;

@@ -1,6 +1,5 @@
 package ua.krucheniuk.controller.command;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,22 +12,22 @@ import ua.krucheniuk.entity.User;
 import ua.krucheniuk.service.LibrarianService;
 
 
-
 public class ReadersCommand implements Command {
 	
-    private LibrarianService librarianService = LibrarianService.getInstance();
+    LibrarianService librarianService;
+
+	public ReadersCommand(LibrarianService librarianService) {
+		this.librarianService = librarianService;
+	}
 
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		List <User> readers = librarianService.getInfoAboutAllReaders();
 		request.setAttribute("readers", readers);
-		List<Order> currentOrders = librarianService.getBookOrders();		
-		request.setAttribute("orders", currentOrders);
-		
+		List<Order> currentOrders = librarianService.getHandledBookOrders();
 		Map<Integer, Integer> readerDebt = librarianService.countDebt(currentOrders);
 		request.setAttribute("readerDebt", readerDebt);
-
 		
         return Path.READERS_PAGE;
     }

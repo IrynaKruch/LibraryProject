@@ -11,11 +11,14 @@ import ua.krucheniuk.constants.Messages;
 import ua.krucheniuk.constants.Path;
 
 public class LoginCommand implements Command {
-	
-    private final static Logger log = Logger.getLogger(LoginCommand.class);
 
-	AuthService authService = AuthService.getInstance();
+	private final static Logger log = Logger.getLogger(LoginCommand.class);
 
+	AuthService authService;
+
+	public LoginCommand(AuthService authService) {
+		this.authService = authService;
+	}
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -24,7 +27,7 @@ public class LoginCommand implements Command {
 		String locale = request.getParameter("locale");
 
 		if (!authService.checkLogin(login) || !authService.checkPassword(password)) {
-            request.setAttribute("errMessage", Messages.getInstance(locale).getString(Messages.LOG_ERROR));
+			request.setAttribute("errMessage", Messages.getInstance(locale).getString(Messages.LOG_ERROR));
 			return Path.LOGIN_PAGE;
 		}
 
@@ -33,16 +36,15 @@ public class LoginCommand implements Command {
 			return Path.ERROR_PAGE;
 		}
 
-		User user = AuthService.getInstance().login(login, password);
-		if (user!=null) {
+		User user = authService.login(login, password);
+		if (user != null) {
 			CommandUtility.setAttributes(request, user);
 			return "redirect:" + Path.HOME_PAGE;
-			
 		} else {
 			log.error(user);
 			CommandUtility.logout(request, login);
 			request.setAttribute("errMessage", Messages.getInstance(locale).getString(Messages.LOG_ERROR));
-			return Path.ERROR_PAGE;	
+			return Path.ERROR_PAGE;
 		}
 	}
 }

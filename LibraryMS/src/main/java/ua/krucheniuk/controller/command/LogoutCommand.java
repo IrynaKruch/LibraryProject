@@ -17,12 +17,9 @@ public class LogoutCommand implements Command {
 
 		if (user.isPresent()) {
 			CommandUtility.logout(request, user.get().getLogin());
-			session.removeAttribute("sessionUser");}
-		
-		if (session != null)
-				session.invalidate();
+				session.invalidate();}
 
-			return Path.LOGIN_PAGE;
+			return "redirect:" +Path.LOGIN_PAGE;
 		}
 	
 

@@ -21,7 +21,21 @@
             <th><fmt:message key="homepage.bookname"/></th>
             <th><fmt:message key="homepage.author"/></th>
             <th><fmt:message key="reader.daysLeft" /></th>
-            <th><fmt:message key="homepage.subscribe" /></th>
+            <th>
+ 			 <div class="dropdown">
+ 			   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+ 			   <fmt:message key="homepage.kindOfOrder" />
+    			<span class="caret"></span></button>
+    			<ul class="dropdown-menu">
+      			<li><a href="<c:url value="/searchOrders?type=true"/>">
+      			<fmt:message key="homepage.subscribe" /></a></li>
+      			<li><a href="<c:url value="/searchOrders?type=false"/>">
+      			<fmt:message key="homepage.readingRoom" /></a></li>
+      			<li><a href="<c:url value="/searchOrders"/>">
+      			<fmt:message key="homepage.allorders" /></a></li>
+    			</ul>
+  			</div>
+            </th>
             <th><fmt:message key="librarian.giveBook"/></th>
             <th><fmt:message key="librarian.return"/></th>
         </tr>

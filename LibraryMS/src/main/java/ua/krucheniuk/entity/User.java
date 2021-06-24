@@ -1,6 +1,7 @@
 package ua.krucheniuk.entity;
 
-public class User {
+public class User implements Cloneable{
+	
     private int id;
     private String fullname;
     private String email;
@@ -92,6 +93,11 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", fullname=" + fullname + ", email=" + email + ", login=" + login + ", password="
 				+ password + ", role=" + role + "]";
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
     
     

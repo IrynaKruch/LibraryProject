@@ -11,17 +11,22 @@ import ua.krucheniuk.entity.Order;
 import ua.krucheniuk.service.LibrarianService;
 
 public class GetOrdersCommand implements Command {
-    private LibrarianService librarianService = LibrarianService.getInstance();
+
+	LibrarianService librarianService;
+
+	public GetOrdersCommand(LibrarianService librarianService) {
+		this.librarianService = librarianService;
+	}
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		List<Order> currentOrders = librarianService.getBookOrders();		
+		List<Order> currentOrders = librarianService.getBookOrders();
 		request.setAttribute("orders", currentOrders);
-		
-		Map<Integer, String> daysleft = librarianService.countDaysLeft(currentOrders);
+
+		Map<Integer, String> daysleft = librarianService.setDaysLeftColumn(currentOrders);
 		request.setAttribute("daysLeft", daysleft);
 
-        return Path.LIBRARIAN_PAGE;
+		return Path.LIBRARIAN_PAGE;
 	}
 
 }

@@ -10,15 +10,20 @@ import ua.krucheniuk.service.LibrarianService;
 
 public class SetRoleCommand implements Command {
 
-	AuthService authService = AuthService.getInstance();
-	LibrarianService librarianService = LibrarianService.getInstance();
+	AuthService authService;
+	LibrarianService librarianService;
+
+	public SetRoleCommand(AuthService authService, LibrarianService librarianService) {
+		this.authService = authService;
+		this.librarianService = librarianService;
+	}
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		User user = librarianService.findUserById(Integer.parseInt(request.getParameter("userId")));
 		user.setRole(request.getParameter("role"));
-		
 		authService.update(user);
-		
+
 		return Path.READERS_COMMAND;
 	}
 

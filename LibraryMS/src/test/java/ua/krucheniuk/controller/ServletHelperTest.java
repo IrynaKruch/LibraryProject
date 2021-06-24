@@ -10,15 +10,17 @@ import ua.krucheniuk.controller.command.HomePageCommand;
 import ua.krucheniuk.controller.command.LoginCommand;
 import ua.krucheniuk.controller.command.NoCommand;
 import ua.krucheniuk.controller.command.RegisterCommand;
+import ua.krucheniuk.service.AuthService;
+import ua.krucheniuk.service.LibrarianService;
 
 public class ServletHelperTest {
 	
 	private static Map<String, Command> commands = new HashMap<String, Command>();
 
 	static {
-		commands.put("register", new RegisterCommand());
-		commands.put("catalogue", new HomePageCommand());
-		commands.put("login", new LoginCommand());
+		commands.put("register", new RegisterCommand(new AuthService()));
+		commands.put("catalogue", new HomePageCommand(new LibrarianService()));
+		commands.put("login", new LoginCommand(new AuthService()));
 		}
 	
 	

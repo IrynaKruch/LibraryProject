@@ -3,10 +3,9 @@ package ua.krucheniuk.service;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
-
 import ua.krucheniuk.dao.model.DaoFactory;
 import ua.krucheniuk.entity.User;
+import ua.krucheniuk.exception.NotUniqueUserException;
 
 public class AuthService {
 	
@@ -18,42 +17,22 @@ public class AuthService {
     private static final String VALID_NUMBER = "[0-9]{1,3}";
 
     
-    private static final Logger log=Logger.getLogger(AuthService.class);
-
-	
-	
-	private static volatile AuthService authService;
-
 	DaoFactory factory = DaoFactory.getInstance();
-
-	private AuthService(){
-
-    }
-
-    public static AuthService getInstance() {
-    	AuthService localInstance = authService;
-        if (localInstance == null) {
-            synchronized (AuthService.class) {
-                localInstance = authService;
-                if (localInstance == null) {
-                	authService = localInstance = new AuthService();
-                }
-            }
-        }
-        return localInstance;
-    }
 
     public User login(String login, String password){
         return factory.createUserDao().login(login,password);
     }
 
-    public String register(User user){
-        return factory.createUserDao().create(user);
+    public String register(User user) throws NotUniqueUserException{
+        return factory.createUserDao().createUser(user);
     }
 	
-    public String update(User user){
+    public String update(User user) {
         return factory.createUserDao().update(user);
     }	
+    public String updateUser(User user) throws NotUniqueUserException {
+        return factory.createUserDao().updateUser(user);
+    }
     
     public boolean checkName(String name){
         return name.matches(VALID_NAME_REGEX);

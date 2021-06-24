@@ -1,0 +1,33 @@
+2021-06-23 19:42:50 ERROR UserDaoMySQL:158 - Duplicate entry 'Sveta' for key 'users.login'
+  2021-06-23 19:42:50 INFO  UpdateUserCommand:43 - Duplicate entry 'Sveta' for key 'users.login'
+  2021-06-24 12:00:57 INFO  ReadersCommand:33 - [Order [id=3, user=User [id=1, fullname=null, email=null, login=null, password=null, role=null], book=null, lendDate=null, returnDate=2021-06-22, subscribe=false, processed=false], Order [id=4, user=User [id=3, fullname=null, email=null, login=null, password=null, role=null], book=null, lendDate=null, returnDate=2021-06-20, subscribe=false, processed=false], Order [id=6, user=User [id=3, fullname=null, email=null, login=null, password=null, role=null], book=null, lendDate=null, returnDate=2021-06-18, subscribe=false, processed=false], Order [id=11, user=User [id=2, fullname=null, email=null, login=null, password=null, role=null], book=null, lendDate=null, returnDate=2021-07-22, subscribe=false, processed=false]]
+  2021-06-24 12:01:32 ERROR LoginCommand:43 - 
+  2021-06-24 12:09:17 INFO  BookDaoMySQL:239 - 0
+  2021-06-24 12:12:25 INFO  SortingCommand:54 - [Book [id=7, name=Don Quixote, author=Miguel de Cervantes, edition=Ecco, yearOfEd=2005, quantity=4], Book [id=6, name=Frankenstein, author=Shelley Mary, edition=Penguin Classics, yearOfEd=2012, quantity=2], Book [id=8, name=Little Women, author=Alcott Louisa May, edition=Scholarship, yearOfEd=2006, quantity=5]]
+  2021-06-24 12:12:25 INFO  BookDaoMySQL:239 - 0
+  2021-06-24 12:15:04 INFO  SortingCommand:54 - [Book [id=9, name=Енеїда, author=Котляревський Іван, edition=Сокіл, yearOfEd=1999, quantity=5], Book [id=3, name=Tygrolovy, author=Ivan Bahriany, edition=Chas maystriv, yearOfEd=2016, quantity=3], Book [id=5, name=The Great Gatsby, author=Fitzgerald F. Scott, edition=Penguin Classics, yearOfEd=2000, quantity=3]]
+  2021-06-24 12:15:04 INFO  BookDaoMySQL:239 - 7
+  2021-06-24 12:15:14 INFO  SortingCommand:54 - [Book [id=8, name=Little Women, author=Alcott Louisa May, edition=Scholarship, yearOfEd=2006, quantity=5], Book [id=4, name=Pride and Prejudice, author=Austen Jane, edition=Penguin Classics, yearOfEd=2012, quantity=2], Book [id=5, name=The Great Gatsby, author=Fitzgerald F. Scott, edition=Penguin Classics, yearOfEd=2000, quantity=3]]
+  2021-06-24 12:15:14 INFO  BookDaoMySQL:239 - 7
+  2021-06-24 12:15:28 INFO  SortingCommand:54 - [Book [id=9, name=Енеїда, author=Котляревський Іван, edition=Сокіл, yearOfEd=1999, quantity=5]]
+  2021-06-24 12:15:28 INFO  BookDaoMySQL:239 - 7
+  2021-06-24 12:15:31 INFO  SortingCommand:54 - [Book [id=3, name=Tygrolovy, author=Ivan Bahriany, edition=Chas maystriv, yearOfEd=2016, quantity=3], Book [id=7, name=Don Quixote, author=Miguel de Cervantes, edition=Ecco, yearOfEd=2005, quantity=4], Book [id=6, name=Frankenstein, author=Shelley Mary, edition=Penguin Classics, yearOfEd=2012, quantity=2]]
+  2021-06-24 12:15:31 INFO  BookDaoMySQL:239 - 7
+  2021-06-24 12:21:02 INFO  SortingCommand:54 - [Book [id=3, name=Tygrolovy, author=Ivan Bahriany, edition=Chas maystriv, yearOfEd=2016, quantity=3], Book [id=7, name=Don Quixote, author=Miguel de Cervantes, edition=Ecco, yearOfEd=2005, quantity=4], Book [id=6, name=Frankenstein, author=Shelley Mary, edition=Penguin Classics, yearOfEd=2012, quantity=2]]
+  2021-06-24 12:21:02 INFO  BookDaoMySQL:239 - 7
+  2021-06-24 12:21:30 INFO  SortingCommand:54 - [Book [id=8, name=Little Women, author=Alcott Louisa May, edition=Scholarship, yearOfEd=2006, quantity=5], Book [id=4, name=Pride and Prejudice, author=Austen Jane, edition=Penguin Classics, yearOfEd=2012, quantity=2], Book [id=5, name=The Great Gatsby, author=Fitzgerald F. Scott, edition=Penguin Classics, yearOfEd=2000, quantity=3]]
+  2021-06-24 12:21:30 INFO  BookDaoMySQL:239 - 7
+  2021-06-24 12:21:38 INFO  SortingCommand:54 - [Book [id=3, name=Tygrolovy, author=Ivan Bahriany, edition=Chas maystriv, yearOfEd=2016, quantity=3], Book [id=7, name=Don Quixote, author=Miguel de Cervantes, edition=Ecco, yearOfEd=2005, quantity=4], Book [id=6, name=Frankenstein, author=Shelley Mary, edition=Penguin Classics, yearOfEd=2012, quantity=2]]
+  2021-06-24 12:21:38 INFO  BookDaoMySQL:239 - 7
+  2021-06-24 12:21:45 INFO  SortingCommand:54 - [Book [id=3, name=Tygrolovy, author=Ivan Bahriany, edition=Chas maystriv, yearOfEd=2016, quantity=3], Book [id=7, name=Don Quixote, author=Miguel de Cervantes, edition=Ecco, yearOfEd=2005, quantity=4], Book [id=6, name=Frankenstein, author=Shelley Mary, edition=Penguin Classics, yearOfEd=2012, quantity=2]]
+  2021-06-24 12:21:45 INFO  BookDaoMySQL:239 - 7
+  2021-06-24 12:43:00 ERROR UserDaoMySQL:157 - Duplicate entry 'sveta' for key 'users.login'
+  2021-06-24 12:43:00 INFO  UpdateUserCommand:43 - Duplicate entry 'sveta' for key 'users.login'
+  2021-06-24 13:05:38 ERROR ExceptionFilter:33 - For input string: "Fjsldajfls"
+  2021-06-24 13:09:43 ERROR ExceptionFilter:33 - Servlet execution threw an exception
+  2021-06-24 13:10:15 ERROR ExceptionFilter:33 - Servlet execution threw an exception
+  2021-06-24 13:11:31 INFO  SortingCommand:54 - [Book [id=7, name=Don Quixote, author=Miguel de Cervantes, edition=Ecco, yearOfEd=2005, quantity=4], Book [id=6, name=Frankenstein, author=Shelley Mary, edition=Penguin Classics, yearOfEd=2012, quantity=2], Book [id=8, name=Little Women, author=Alcott Louisa May, edition=Scholarship, yearOfEd=2006, quantity=5]]
+  2021-06-24 13:11:31 INFO  BookDaoMySQL:239 - 7
+  2021-06-24 17:59:13 ERROR UserDaoMySQL:157 - Duplicate entry 'sveta' for key 'users.login'
+  2021-06-24 17:59:13 INFO  UpdateUserCommand:49 - Duplicate entry 'sveta' for key 'users.login'
+  

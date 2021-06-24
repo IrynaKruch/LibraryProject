@@ -45,6 +45,7 @@ public class AccessFilter implements Filter {
 		librarianCommands.add("returnBook");
 		librarianCommands.add("readers");
 		librarianCommands.add("readerforAdmin");
+		librarianCommands.add("searchOrders");
 		
 
 	}

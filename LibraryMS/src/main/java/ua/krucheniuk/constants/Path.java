@@ -15,13 +15,10 @@ public class Path {
 	public static final String READERS_PAGE = "/views/readers.jsp";
 	public static final String ADD_BOOK_PAGE = "/views/addBook.jsp";
 
-
-	//
-//	// commands
+	// commands
 	public static final String CATALOGUE_ALL_BOOKS_COMMAND = "/catalogue";
 	public static final String SHOWORDERS_COMMAND = "/showOrders";
 	public static final String READERS_COMMAND = "/readers";
 
-//
 
 }

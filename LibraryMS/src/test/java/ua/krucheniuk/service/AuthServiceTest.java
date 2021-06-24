@@ -2,16 +2,12 @@ package ua.krucheniuk.service;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AuthServiceTest {
 	
-    private AuthService authService=AuthService.getInstance();
+    private AuthService authService = new AuthService();
     private String validName="David";
     private String nameWithSpace="Davi d";
     private String validEmail="Test@mail.com";
@@ -19,28 +15,6 @@ public class AuthServiceTest {
     private String validPassword="Password1";
     private String shortPassword="Pas1";
 
-
-//	@BeforeClass
-//	public static void setUpBeforeClass() throws Exception {
-//	}
-//
-//	@AfterClass
-//	public static void tearDownAfterClass() throws Exception {
-//	}
-//
-//	@Before
-//	public void setUp() throws Exception {
-//		
-//	}
-//
-//	@After
-//	public void tearDown() throws Exception {
-//	}
-
-	@Test
-	public final void testGetInstance() {
-		Assert.assertTrue(AuthService.getInstance() instanceof AuthService);
-	}
 
 	@Test
 	public final void testLogin() {

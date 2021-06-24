@@ -9,14 +9,19 @@ import ua.krucheniuk.constants.Path;
 import ua.krucheniuk.entity.Book;
 import ua.krucheniuk.service.LibrarianService;
 
-public class HomePageCommand implements Command{
+public class HomePageCommand implements Command {
+
+	LibrarianService librarianService;
+
+	public HomePageCommand(LibrarianService librarianService) {
+		this.librarianService = librarianService;
+	}
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		List<Book> catalogue = LibrarianService.getInstance().findAllBooks();
+		List<Book> catalogue = librarianService.findAllBooks();
 		request.setAttribute("catalogue", catalogue);
 		return Path.HOME_PAGE;
 	}
-
 
 }

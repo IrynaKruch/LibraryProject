@@ -2,32 +2,13 @@ package ua.krucheniuk.service;
 
 import java.util.List;
 
-import ua.krucheniuk.dao.impl.BookDaoMySQL;
 import ua.krucheniuk.dao.model.DaoFactory;
 import ua.krucheniuk.entity.Book;
+import ua.krucheniuk.entity.Order;
 
 public class SearchService {
 
-	private static volatile SearchService searchService;
-
 	DaoFactory factory = DaoFactory.getInstance();
-
-	private SearchService() {
-
-	}
-
-	public static SearchService getInstance() {
-		SearchService localInstance = searchService;
-		if (localInstance == null) {
-			synchronized (SearchService.class) {
-				localInstance = searchService;
-				if (localInstance == null) {
-					searchService = localInstance = new SearchService();
-				}
-			}
-		}
-		return localInstance;
-	}
 
 	public List<Book> getBooksByName(String name) {
 		return factory.createBookDao().findByName(name);
@@ -47,5 +28,9 @@ public class SearchService {
 
 	public int bookCount() {
 		return factory.createBookDao().getBookCount();
+	}
+	
+	public List<Order> getOrdersBySubscribe(Boolean type){
+		return factory.createOrderDao().findbySubscribe(type);
 	}
 }
