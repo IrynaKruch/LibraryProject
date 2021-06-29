@@ -8,8 +8,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-
 import ua.krucheniuk.constants.Path;
 import ua.krucheniuk.entity.Order;
 import ua.krucheniuk.service.LibrarianService;

@@ -1,6 +1,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="m" uri="/WEB-INF/libraryTags.tld" %>  
+
 
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 	pageEncoding="UTF-8"%>
@@ -76,4 +78,6 @@
 </nav>
 <div class="container p-1">
 <h3><fmt:message key="header.hello" />, <c:out value="${sessionUser.fullname}" />!</h3>
+<h5><fmt:message key="header.date" />: <m:date/></h5>
 </div>
+</html>
